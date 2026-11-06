@@ -1,17 +1,32 @@
 package net.montaki;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import net.montaki.composants.Boisson;
+import net.montaki.composants.Deca;
+import net.montaki.composants.Sumatra;
+import net.montaki.decorateurs.Caramel;
+import net.montaki.decorateurs.Chocolat;
+import net.montaki.decorateurs.Lait;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Boisson b1 = new Deca();
+        afficher(b1);
+
+        Boisson b2 = new Chocolat(b1);
+        afficher(b2);
+
+        Boisson b3 = new Chocolat(new Chocolat(new Deca()));
+        afficher(b3);
+
+        Boisson b4 = new Caramel(new Lait(new Sumatra()));
+        afficher(b4);
+
+        Boisson b5 = new Lait(new Caramel(new Chocolat(new Deca())));
+        afficher(b5);
+    }
+
+    private static void afficher(Boisson b) {
+        System.out.printf("%-35s : %.2f DH%n", b.getDescription(), b.cout());
     }
 }
